@@ -4,7 +4,7 @@
             <tr>
                 <td>글쓴이</td>
                 <td>제목</td>
-                <td>사람</td>
+                <td>내용</td>
             </tr>
             <tr :key="index" v-for="(value, index) in data">
                 <td>{{value.writer}}</td>
