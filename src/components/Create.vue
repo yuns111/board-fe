@@ -1,41 +1,54 @@
 <template>
-    <div>
-        <input placeholder="글쓴이" v-model="writer"> <br>
-        <input placeholder="제목" v-model="title"> <br>
-        <textarea placeholder="내용" v-model="content"></textarea> <br>
-        <button @click="write">저장</button>
-    </div>
+	<div>
+		<input placeholder="글쓴이" v-model="writer"> <br>
+		<input placeholder="제목" v-model="title"> <br>
+		<textarea placeholder="내용" v-model="content"></textarea> <br>
+		<button @click="index !== undefined ? update() : write()">{{index !== undefined ? '수정' : '저장'}}</button>
+	</div>
 </template>
 
 <script>
-    import data from '@/data'
+	import data from '@/data'
 
-    export default {
-        name: "Create",
-        data() {
-            return {
-                data: data,
-                writer: "",
-                title: "",
-                content: ""
-            }
-        },
-        methods: {
-            write() {
-                this.data.push(
-                    {
-                        writer: this.writer,
-                        title: this.title,
-                        content: this.content
-                    }
-                );
+	export default {
+		name: "Create",
+		data() {
+			const index = this.$route.params.contentId;
 
-                this.$router.push({
-                    path: '/'
-                })
-            }
-        }
-    }
+			return {
+				data: data,
+				index: index,
+				writer: index !== undefined ? data[index].writer : "",
+				title: index !== undefined ? data[index].title : "",
+				content: index !== undefined ? data[index].content : ""
+			}
+		},
+		methods: {
+			write() {
+				this.data.push(
+					{
+						writer: this.writer,
+						title: this.title,
+						content: this.content
+					}
+				);
+
+				this.$router.push({
+					path: '/'
+				})
+			},
+
+			update() {
+				data[this.index].writer = this.writer;
+				data[this.index].title = this.title;
+				data[this.index].content = this.content;
+
+				this.$router.push({
+					path: '/'
+				})
+			}
+		}
+	}
 </script>
 
 <style scoped>
