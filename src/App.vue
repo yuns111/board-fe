@@ -1,11 +1,20 @@
 <template>
   <div id="app">
     <div id="nav">
-        <router-view/>
+        <header-component />
+		<router-view />
     </div>
   </div>
 </template>
-
+<script>
+	import HeaderComponent from '@/components/HeaderComponent';
+	export default {
+		name: 'App',
+		components: {
+			HeaderComponent
+		}
+	}
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -13,6 +22,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
